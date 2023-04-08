@@ -20,7 +20,6 @@ def get_page_count(keyword):
 
 	if not pages: 
 		return 1
-	
 	if len(pages) >= 5:
 		return 5
 	else:
