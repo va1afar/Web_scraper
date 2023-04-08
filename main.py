@@ -1,11 +1,11 @@
 from extractors.indeed_scraper import extract_indeed_jobs
 from extractors.wwr_scraper import extract_wwr_jobs
 
+# receive input, merge wwr and indeed datas.
+# and export as a csv file.
 keyword = input("What do you want to search for?")
-
 indeed = extract_indeed_jobs(keyword)
 wwr = extract_wwr_jobs(keyword)
-
 jobs = indeed + wwr
 
 file = open(f"{keyword}.csv", "w")
