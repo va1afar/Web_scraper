@@ -13,11 +13,9 @@ browser = webdriver.Chrome(options=options)
 def get_page_count(keyword):
 	base_url = "https://kr.indeed.com/jobs?q="
 	browser.get(f"{base_url}{keyword}")
-
 	soup = BeautifulSoup(browser.page_source, "html.parser")
 	pagination = soup.find("nav", class_="ecydgvn0")
 	pages = pagination.find_all("div", class_="ecydgvn1")
-
 	if not pages: 
 		return 1
 	if len(pages) >= 5:
@@ -28,21 +26,15 @@ def get_page_count(keyword):
 # this scraps information from "indeed.com(kr)"
 def extract_indeed_jobs(keyword):
 	pages = get_page_count(keyword)
-	print("Found", pages, "pages")
-
 	results = []
-
 	for page in range(pages):
 		base_url = "https://kr.indeed.com/jobs"
 		final_url =f"{base_url}?q={keyword}&start={page*10}"
 		print("Requesting", final_url)
-
 		browser.get(final_url)
 		soup = BeautifulSoup(browser.page_source,"html.parser")
 		job_list = soup.find("ul", class_="jobsearch-ResultsList")
 		jobs = job_list.find_all("li", recursive=False) # Search only first li's
-
-		# personal practice from here
 		for job in jobs:
 			zone = job.find("div", class_="mosaic-zone") 
 			if zone == None:
