@@ -1,3 +1,4 @@
 
 extractors/__pycache__/wwr_scraper.cpython-310.pyc
 .gitattributes
+__pycache__/file.cpython-310.pyc
